@@ -11,7 +11,7 @@ def fird(inString):
     if a > b:
         raise WcbcException("a must be equal to or smaller than b")
     
-    for i in range(a, b + 1):
+    for i in range(max(a, 2), min(b + 1, M)):
         if M % i == 0:
             return "yes"
     
