@@ -1,2 +1,2 @@
-# wcbc_problems
+# nanahan
 計算できるものできないものの問題を解く
