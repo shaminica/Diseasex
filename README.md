@@ -1,2 +1,2 @@
-# congenial
+# Diseasex
 計算できるものできないものの問題を解く
