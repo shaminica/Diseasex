@@ -2,16 +2,21 @@ import utils
 from binAd import isProof
 
 
-def provableInBinAd(inString):
+def provableInBinAd(inString, maxString=1000):
     proofString = ''
+    i =0
 
     while True:
         try:
             res = isProof(proofString, inString)
         except:
-            res = False
+            res = 'no'
 
-        if res:
-            return 'yes'
+        if res == 'yes':
+            return res
 
         proofString = utils.nextASCII(proofString)
+        i += 1
+
+        if i == maxString:
+            return 'Maximum reached'
