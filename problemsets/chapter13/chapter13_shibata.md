@@ -39,8 +39,18 @@ $(\lnot x_1 \lor \lnot x_2 \lor d_1) \land (\lnot d_1 \lor \lnot x_3 \lor x_4)\l
 演習問題12.14の判定問題SubsetSumWithFivesを思い出そう. SubsetSum問題と同じであるが, 部分集合を作るときに, 必要に応じて重さの5の重しを10個まで使えることだけが異なる. SubsetSum$equiv_{P}$SubsetSumWithFivesを証明せよ.
 
 ### 答
-(i) SubsetSum$\le_{P}$SubsetSumWithFivesを示す.
-SubsetSumWithFives問題を解いたのち, SubsetSumの入力のしきい値を5ずつ減らしながら10回SubsetSumWithFivesを解き, 1回でも"yes"を返せば"yes", そうでなければ"no"を返す.
+(i) SubsetSum$\le_{P}$SubsetSumWithFivesを示す.  
+SubsetSumWithFives問題の入力インスタンスの重みに5を10個加えたものを考える. このインスタンスの作成は定数時間で実行できる. SubsetSumWithFives問題の解が"yes"のとき, 新しく作成されたインスタンスはSubsetSum問題で"yes"を返し, SubsetSumWithFives問題の解が"no"のとき, 新しく作成されたインスタンスはSubsetSum問題で"no"を返す. 
 
-(ii) SubsetSumWithFives$\le_{P}$SubsetSumを示す.
-SubsetSum問題を解いたのち, SubsetSumWithFivesの入力の重みに5をひとつづつ加えながら10回SubsetSum問題を解き, 1回でも"yes"を返せば"yes", そうでなければ"no"を返す.
+(ii) SubsetSumWithFives$\le_{P}$SubsetSumを示す.  
+SubsetSumWithFives問題を解けるアルゴリズムAを仮定し, 次のプログラムを考える. Aを用いてSubsetSum問題の入力インスタンスを解いたのち, 入力におけるしきい値を5ずつ増やしながら10回同様にAを適用し, これらの11回の試行においてすべて"yes"を返せば"yes", そうでなければ"no"を返す.
+
+このプログラムはAの計算量のたかだか定数倍で実行できる. また, SubsetSum問題の正インスタンスに対して適用すると"yes"を返す.  
+このプログラムの正インスタンスがSubsetSum問題の正インスタンスであることは次のように説明される（されない）. 
+- このプログラムで実行された最小のしきい値を$w$とすると, 各重しと10個の重さ5の重しによって$w+5l$($l$は0以上10以下の整数)を生成することができる
+- $w+5l$と$w+5(l+1)$両方生成できるので, $w+5(l+1)$を生成した際には重さ5の重しを少なくとも1つ余らせている.
+- 反例: "1,1,1,10;8"
+
+
+
+
