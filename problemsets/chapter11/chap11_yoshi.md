@@ -39,3 +39,15 @@ def yesViaHisp(progString, inString):
 
 #### (b) Pが必ず停止する場合に絞ったとしてもHISPは決定不能.
 - yesOnStringは$P(I)$が停止するとしても決定不能であるため, (a)から決定不能.
+~~~
+def weirdYesOnString(progString):
+    if yesOnString(progString, progString) == ’yes’:
+        return ’no’ 
+    else:
+        return ’yes’
+~~~
+
+- weirdYesOnString(rf("weirdYesOnString"))は, yesOnString("weirdYesOnString", "weirdYesOnString")がyesの時にnoと返り, noの時にyesと返る.
+- yesOnString("weirdYesOnString", "weirdYesOnString")がyes/noということは, weirdYesOnString(rf("weirdYesOnString"))がyes/noということなので矛盾する. 
+- この議論には, weirdYesOnString(rf("weirdYesOnString"))が停止するかどうかは依存しない.
+- あ、weirdYesOnStringは停止しないから絞ったドメインに入ってないわ....
