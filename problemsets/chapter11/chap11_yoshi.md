@@ -38,16 +38,19 @@ def yesViaHisp(progString, inString):
 - よってHISPはyesOnStringに還元されるため, 決定不能.
 
 #### (b) Pが必ず停止する場合に絞ったとしてもHISPは決定不能.
-- yesOnStringは$P(I)$が停止するとしても決定不能であるため, (a)から決定不能.
+- HISPのドメインが停止される関数に絞られる時, 停止することが保証されるのはalterYestoHISP関数のみ
+- yesOnStringの問題の入力プログラムが停止することは保証されていない
+- 以下の形でalterYesToHISPのところは, 定義するとuniversalの関数はO(1)で終了するため, universalが終了する場合十分大きなnではO(n)で計算時間が増える
+- よって, 以下のコードは常に停止しかつ, yesOnStringをHISPに還元できるため, 結論は変わらない.
 ~~~
-def weirdYesOnString(progString):
-    if yesOnString(progString, progString) == ’yes’:
-        return ’no’ 
-    else:
-        return ’yes’
-~~~
+def alterYesToHISP(n):
+    progString = rf("progString.txt")
+    inString = rf("inString.txt")
 
-- weirdYesOnString(rf("weirdYesOnString"))は, yesOnString("weirdYesOnString", "weirdYesOnString")がyesの時にnoと返り, noの時にyesと返る.
-- yesOnString("weirdYesOnString", "weirdYesOnString")がyes/noということは, weirdYesOnString(rf("weirdYesOnString"))がyes/noということなので矛盾する. 
-- この議論には, weirdYesOnString(rf("weirdYesOnString"))が停止するかどうかは依存しない.
-- あ、weirdYesOnStringは停止しないから絞ったドメインに入ってないわ....
+    simulate nsteps universal(progString, inString)
+
+    if val == "yes":
+     
+    else:
+        for i in range(2 ** len(n))
+~~~
