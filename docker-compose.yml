@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  python:
+    build: .
+    volumes:
+      - .:/home/jovyan/work
+    environment:
+      - PYTHONPATH=/home/jovyan/work/programs:$PYTHONPATH
