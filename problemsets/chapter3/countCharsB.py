@@ -1,2 +1,2 @@
 def countChars(inString):
-    return len(inString)  
+    return len(inString) 
