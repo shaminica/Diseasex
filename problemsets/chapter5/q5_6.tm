@@ -1,31 +1,31 @@
-appendA
-q0->q0: !_;R
-q0->qH: _;A,S
-deleteToOutput
 q0->q1: x;R
 q1->q1: !x;R
-q1->q2: x;L
-q2->q2: !x;_,L
-q2->qH: x;_,S
-Answer5_6
-q0->q1: x;R
-q1->q1: !x;R
-q1->q2: x;L
-q2->q2: !ACGT;L
-q2->appendA: A;y,S
-appendA->q3: A;S
-q2->appendC: C;y,S
-appendC->q3: C;S
-q2->appendG: G;y,S
-appendG->q3: G;S
-q2->appendT: T;y,S
-appendT->q3: T;S
-q3->q3: !y;L
-q3->q2: y;L
-q2->deleteToOutput: x;S
-deleteToOutput->appendx: x;S
-appendx->qH: x;S
+q1->q2: x;R
+q2->q3: ~;x,L
+q3->q4: ~;L
+q4->q4: !xACGT;L
+q4->appendA: A;y,S
+appendA->q5: A;S
+q4->appendC: C;y,S
+appendC->q5: C;S
+q4->appendG: G;y,S
+appendG->q5: G;S
+q4->appendT: T;y,S
+appendT->q5: T;S
+q5->q5: !y;L
+q5->q4: y;L
+q4->appendx: x;S
+appendx->q6: x;S
+q6->q6: !y;L
+q6->q7: y;L
+q7->q7: y;L
+q7->deleteToOutput: x;S
+deleteToOutput->qH: x;S
 
 
-block: qBinIncr=binaryIncrementer.tm
-block: qShiftInt=shiftInteger.tm
+block: appendA=appendA.tm
+block: appendC=appendC.tm
+block: appendT=appendT.tm
+block: appendG=appendG.tm
+block: appendx=appendx.tm
+block: deleteToOutput=deleteToOutput.tm
