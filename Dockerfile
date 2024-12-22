@@ -2,7 +2,7 @@ FROM jupyter/base-notebook:latest
 
 USER root
 RUN apt update && \
-    apt install -y gcc git graphviz graphviz-dev
+    apt install -y gcc git graphviz
 
 COPY requirements.txt /tmp
 RUN pip install --upgrade pip && \
