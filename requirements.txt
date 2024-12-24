@@ -1,5 +1,3 @@
 networkx
 matplotlib
-pygraphviz
-transitions
 graphviz
