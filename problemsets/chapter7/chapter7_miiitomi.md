@@ -1,8 +1,8 @@
 ## 7. 2
 ### 問
  - 判定問題IntOnStringを考える.
-    - 入力: プログラムPと入力文字列I
-    - 解: P(I)が非負整数なら"yes", そうでなければ"no".
+    - 入力: プログラムPと入力文字列I.
+    - 解: P(I)が非負整数なら"yes". そうでなければ"no".
  - YesOnString問題をIntOnString問題へ還元する2つのPythonプログラムを書け.
 
 ### 答
@@ -39,7 +39,7 @@
 ### 問
  - 判定問題YesOnPosIntsを考える.
    - 入力: プログラムP.
-   - 解: Pが「P(I)='yes' $\Leftrightarrow$ Iは正整数」というプログラムなら'yes', そうでなければ'no'.
+   - 解: Pが「任意の正整数Iに対して, P(I)='yes'」を満たすなら'yes'. そうでなければ'no'.
  - 以下のプログラム7.9（`yesOnPosIntsViaYoS.py`）は, YesOnPosInts問題をYesOnString問題に還元しようとした試みである.
  - これが正しいチューリング還元でない理由を説明せよ.
    >```
@@ -53,26 +53,23 @@
    >        i += 1
 
 ### 答
-#### 解答1
- - 任意の入力文字列に対し'yes'を返す次のプログラムP1を考える.
+ - 任意の入力文字列に対し'yes'を返すようなプログラムPを考える.
     >```
     >def constantYes(inString):
     >    return 'yes'
     >```
- - これはYesOnPosInts問題の負インスタンスである.
- - しかしyesOnPosIntsViaYoS(P1)は無限ループに入ってしまって'no'を返さない.
- - したがってこのプログラムはYesOnPosInts問題をYesOnString問題にチューリング還元できていない.
+ - これは明らかにYesOnPosInts問題の正インスタンスである.
+ - しかしyesOnPosIntsViaYoS(P)は無限ループに入ってしまって, 'yes'を返すことはない.
+ - したがって, このプログラムではYesOnPosInts問題をYesOnString問題にチューリング還元できていない.
 
-#### 解答2
- - 以下のプログラムP2は, YesOnPosInts問題の正インスタンスである.
-    >```
-    >def yesIffPosInt(inString):
-    >    for i in range(len(inString)):
-    >        if inString[i] not in '0123456789':
-    >            return 'no'
-    >    integer = int(inString)
-    >    if integer == 0:
-    >        return 'no'
-    >    return 'yes'
- - しかしyesOnPosintsViaYoS(P2)は'yes'を返さない.
- - したがってYesOnPosInts問題はYesOnString問題にチューリング還元できていない.
+#### 補足
+ - YesOnPosInts問題をYesOnString問題に還元できるかは分からないが, 逆（YesOnString問題のYesOnPosInts問題への還元）はYesOnEmpty問題などと同様にして簡単にできる.
+      >```
+      >from yesOnPosInts import yesOnPosInts  # 神託関数
+      >from utils import writeFile, rf
+      >
+      >def yesViaPosInts(progString, inString):
+      >    writeFile('progString.txt', progString)
+      >    writeFile('inString.txt', inString)
+      >    return yesOnPosInts(rf('ignoreInput.py'))
+      >```
