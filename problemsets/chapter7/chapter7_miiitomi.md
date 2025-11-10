@@ -40,7 +40,7 @@ EmptyOnEmpty(空文字列に対して空文字列を返すか)問題: $P(\vareps
 #### 答
 YesOnEmpty問題は計算不能であることがわかっているので, YesOnEmpty$\le_{T}$EmptyOnEmptyを示すことでEmptyOnEmptyが計算不能であることの証明を行う. 
 $P$をYesOnEmpty問題の任意の入力とする. 最初に$v=P(\varepsilon)$を計算し, $v="\text{yes}"$のときかつそのときに限り$\varepsilon$を返すプログラム$P^{\prime}$は簡単に作ることができる.
-プログラムの作り方からYesOnEmpty($P^{\prime}$)$="\text{yes}"$のときかつそのときに限りEmptyOnEmpty($P^{\prime}$)$="\text{yes}"$となる.
+プログラムの作り方からYesOnEmpty($P$)$="\text{yes}"$のときかつそのときに限りEmptyOnEmpty($P^{\prime}$)$="\text{yes}"$となる.
 ゆえに, YesOnEmpty($P$)はEmptyOnEmpty($P^{\prime}$)を介して計算できることとなり, 還元が完成する.
 
 ### (b) 
@@ -49,7 +49,7 @@ GAGAOnEmpty(空文字列に対して"GAGA"を返すか)問題: $P(\varepsilon)="
 #### 答 
 YesOnEmpty問題は計算不能であることがわかっているので, YesOnEmpty$\le_{T}$GAGAOnEmptyを示すことでGAGAOnEmptyが計算不能であることの証明を行う. 
 $P$をYesOnEmpty問題の任意の入力とする. 最初に$v=P(\varepsilon)$を計算し, $v="\text{yes}"$のときかつそのときに限り$\text{"GAGA"}$を返すプログラム$P^{\prime}$は簡単に作ることができる.
-プログラムの作り方からYesOnEmpty($P^{\prime}$)$="\text{yes}"$のときかつそのときに限りGAGAOnEmpty($P^{\prime}$)$="\text{yes}"$となる.
+プログラムの作り方からYesOnEmpty($P$)$="\text{yes}"$のときかつそのときに限りGAGAOnEmpty($P^{\prime}$)$="\text{yes}"$となる.
 ゆえに, YesOnEmpty($P$)はGAGAOnEmpty($P^{\prime}$)を介して計算できることとなり, 還元が完成する.
 ### (c) 
 #### 問
@@ -57,7 +57,7 @@ NoOnSome(何らかの文字列$I$に対して"no"を返すか)問題: あるIに
 #### 答 
 YesOnSome問題は計算不能であることがわかっているので, YesOnSome$\le_{T}$NoOnSomeを示すことでNoOnSomeが計算不能であることの証明を行う. 
 $P$をNoOnSome問題の任意の入力とする. $I$を何らかの文字列とし, 最初に$v=P(I)$を計算し, $v="\text{yes}"$のときかつそのときに限り$\text{"no"}$を返すプログラム$P^{\prime}$は簡単に作ることができる.
-プログラムの作り方からYesOnSome($P^{\prime}$)$="\text{yes}"$のときかつそのときに限りNoOnSome($P^{\prime}$)$="\text{yes}"$となる.
+プログラムの作り方からYesOnSome($P$)$="\text{yes}"$のときかつそのときに限りNoOnSome($P^{\prime}$)$="\text{yes}"$となる.
 ゆえに, YesOnSome($P$)はNoOnSome($P^{\prime}$)を介して計算できることとなり, 還元が完成する.
 
 ### (d) 
@@ -65,7 +65,7 @@ $P$をNoOnSome問題の任意の入力とする. $I$を何らかの文字列と�
 YesOnGAGA("GAGA"に対して"yes"を返すか)問題: P("GAGA")="yes"?
 #### 答 　
 YesOnString問題は計算不能であることがわかっているので, YesOnString$\le_{T}$YesOnGAGAを示すことでYesOnGAGAが計算不能であることの証明を行う. 
-P, IをYesOnString問題の任意の入力とする. 入力$"GAGA"$に対して最初に$v=P(I)$を計算し, $v="\text{yes}"$のときかつそのときに限り$\text{"yes"}$を返すプログラム$ingnoreInput$は簡単に作ることができる.
+P, IをYesOnString問題の任意の入力とする. 入力$"GAGA"$に対して最初に$v=P(I)$を計算し, $v="\text{yes}"$のときかつそのときに限り$\text{"yes"}$を返すプログラムingnoreInputは簡単に作ることができる.
 プログラムの作り方からYesOnString($P, I$)$="\text{yes}"$のときかつそのときに限りYesOnGAGA(ingoreInput)$="\text{yes}"$となる.
 ゆえに, YesOnSting($P, I$)はYesOnGAGA(IgnoreInput)を介して計算できることとなり, 還元が完成する.
 ### (e) 
@@ -74,7 +74,7 @@ LongerThan3OnAll(すべての文字列に対して3文字より長い出力を�
 #### 答 
 問3.11と同様にLongerThan3OnString(入力Iの対して3文字より長い出力を返すか)は決定不能である.
 LongerThan3OnString$\le_{T}$LongerThan3OnAllを示すことでLongerThan3OnAllが計算不能であることの証明を行う. 
-P, IをLongerThan3OnString問題の任意の入力とする. すべての入力に対して最初に$v=P(I)$を計算し, $v="\text{yes}"$のときかつそのときに限り$\text{"yes"}$を返すプログラム$ingnoreInput$は簡単に作ることができる.
+P, IをLongerThan3OnString問題の任意の入力とする. すべての入力に対して最初に$v=P(I)$を計算し, $v="\text{yes}"$のときかつそのときに限り$\text{"yes"}$を返すプログラムingnoreInputは簡単に作ることができる.
 プログラムの作り方からLongerThan3OnString($P, I$)$="\text{yes}"$のときかつそのときに限りLongerThan3OnAll(IngoreInput)$="\text{yes}"$となる.
 ゆえに, LongerThan3OnString
 ($P, I$)はLongerThan3OnAll(ignoreInput)を介して計算できることとなり, 還元が完成する.
@@ -151,7 +151,9 @@ P, IをLongerThan3OnString問題の任意の入力とする. すべての入力�
 #### proof
 YesFirstCharacter問題(YFC)を考える. 
    -  入力はASCII文字列Pである. PがPythonプログラムでなければ, 解は"no"となる. そうでない場合, PはSISO Pythonプログラムであるという前提で, ある入力Iに対してIとP(I)の最初の記号が同じなら解は"yes"となる.そのような性質を持つIがなければ, 解は"no"となる.
+
 $S$はSISO Pythonプログラムの中である入力Iに対してIとP(I)の最初の記号が同じものとなるプログラムの集合とする.
- $S$には少なくとも1つの計算可能なプログラム, 例えば$P(I)=I$とする恒等写像のプログラム, が存在し, 少なくとも1つの計算可能なプログラム, 例えばすべてのIに対して$P(I)=\varepsilon$とする定数関数のプログラム, が存在する.
- ライスの定理より, ComputesOneOf${}_{S}$は計算不能であるためYFCは計算不能である.
- ここで, EFCが解をもつ場合に"yes"を出力するプログラムはEFCから容易に作ることができるため, YFCはEFCを介して計算できる. よって還元が成立し, YFC$\le_{T}$EFCより, EFCは計算不能である.
+$S$には少なくとも1つの計算可能なプログラム, 例えば$P(I)=I$とする恒等写像のプログラム, が含まれ, 少なくとも1つの計算可能なプログラム, 例えばすべてのIに対して$P(I)=\varepsilon$とする定数関数のプログラム, が含まれない.
+ライスの定理より, ComputesOneOf${}_{S}$は計算不能であるためYFCは計算不能である.
+ここで, EFCが解をもつ場合に"yes"を出力するプログラムはEFCから容易に作ることができるため, YFCはEFCを介して計算できる. 
+よって還元が成立し, YFC$\le_{T}$EFCより, EFCは計算不能である.
