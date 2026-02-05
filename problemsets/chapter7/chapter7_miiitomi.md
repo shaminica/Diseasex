@@ -147,6 +147,24 @@ P, IをLongerThan3OnString問題の任意の入力とする. すべての入力�
    - 入力： プログラム$P$.
    - 解： 全ての$I$に対し$P(I)$の停止までのステップ数が$|I|$よりも多いなら'yes', そうでなければ'no'.
    （$P(I)$が未定義なら実行ステップは無限大とする)
+### 答
+ - HaltsOnString問題をSlowerThanInputLength問題に還元する.
+   ```
+   from slowertThanInputLength import slowerThanInputLength
+   from utils import rf, writeFile
+
+   def haltsViaSlower(progString, inString):
+      writeFile('progString.txt', progString)
+      writeFile('inString.txt', inString)
+      val = slowerThanInputLength(rf(`ignoreInput.py`)) # (2)
+      if val == 'yes':
+         return 'no'
+      else:
+         return 'yes'
+   ```
+      - `ignoreInput.py`は入力を無視して$P(I)$を実行するので, その実行ステップ数は$P(I)$の実行ステップ数$+c$ (定数).
+      - (P, I)がHaltsOnString問題の正インスタンスなら, 十分大きな$n$をとれば`ignoreInput.py`は$n$文字以上の入力に対して$n$未満のステップ数で止まる. したがって(2)のvalは'no'となり, haltsViaSlowerは'yes'を返す.
+      - (P, I)がHaltsOnStringの負インスタンスなら, `ignoreInput`はどんな入力に対しても停止しない(実行ステップ無限大). したがって(2)のvalは'yes'となり, haltsViaSlowerは'no'を返す.
 
 ## 7.15
 ### 問
@@ -171,6 +189,31 @@ $S$には少なくとも1つの計算可能なプログラム, 例えば$P(I)=I$
    - 入力: プログラム$P$
    - 解: もし$P(M)=3M$となる正整数$M$が存在するなら$M$, そうでないなら'no'.
 ### 答
-   - $S$を, ある正整数$M$については$f(M)=$'yes'となるような関数の集合とする, つまり
-   \[ S = \{ f:\Sigma^* \to \{\text{'yes', 'no'}\} \mid \exists M \in \mathbb{N}_{++}, \ f(M) = \text{'yes'}\}.\]
-   - これは判定可能問題
+   - 以下でYesOnString問題をTripleOnSomeに還元する.
+      ```
+      from utils import universe
+
+      def one_to_three(inString):
+         progString = rf('progString.txt')
+         newInString = rf('inString.txt')
+         val = universe(progString, newInString)
+         if val == 'yes' and inString == '1':
+            return '3'
+         else:
+            return 'no'
+      ```
+      ```
+      from tripleOnSome import tripleOnSome  # 神託関数
+      from utils import rf, writeFile
+
+      def yesViaTriple(progString, inString):
+         writeFile('progString.txt', progString)
+         writeFile('inString.txt', inString)
+         val = tripleOnSome(rf('one_to_three.py'))   # (2)
+         if val == '1':
+            return 'yes'
+         else:
+            return 'no'
+      ```
+      - (P, I)がYesOnStringの正インスタンスなら, `one_to_three.py`は'1'に対し'3'を返すプログラムになるはずなので, (2)のvalは'1'. したがってyesViaTriple(P, I)は'yes'を返す.
+      - 負インスタンスなら`one_to_three.py`は任意のinputに対して'no'または未定義となるプログラムになるはずなので, (2)のvalは'no'. したがってyesViaTriple(P, I)は'no'を返す.
