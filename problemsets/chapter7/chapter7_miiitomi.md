@@ -141,6 +141,31 @@ P, IをLongerThan3OnString問題の任意の入力とする. すべての入力�
 >     return HaltsOnSome(rf('ignoreInput.py'))
 >```
 
+## 7.12
+### 問
+ - 次の判定問題SlowerThanInputLengthが決定不能であることを証明せよ.
+   - 入力： プログラム$P$.
+   - 解： 全ての$I$に対し$P(I)$の停止までのステップ数が$|I|$よりも多いなら'yes', そうでなければ'no'.
+   （$P(I)$が未定義なら実行ステップは無限大とする)
+### 答
+ - HaltsOnString問題をSlowerThanInputLength問題に還元する.
+   ```
+   from slowertThanInputLength import slowerThanInputLength
+   from utils import rf, writeFile
+
+   def haltsViaSlower(progString, inString):
+      writeFile('progString.txt', progString)
+      writeFile('inString.txt', inString)
+      val = slowerThanInputLength(rf(`ignoreInput.py`)) # (2)
+      if val == 'yes':
+         return 'no'
+      else:
+         return 'yes'
+   ```
+      - `ignoreInput.py`は入力を無視して$P(I)$を実行するので, その実行ステップ数は$P(I)$の実行ステップ数$+c$ (定数).
+      - (P, I)がHaltsOnString問題の正インスタンスなら, 十分大きな$n$をとれば`ignoreInput.py`は$n$文字以上の入力に対して$n$未満のステップ数で止まる. したがって(2)のvalは'no'となり, haltsViaSlowerは'yes'を返す.
+      - (P, I)がHaltsOnStringの負インスタンスなら, `ignoreInput`はどんな入力に対しても停止しない(実行ステップ無限大). したがって(2)のvalは'yes'となり, haltsViaSlowerは'no'を返す.
+
 ## 7.15
 ### 問
 次のように定義される計算問題EchoesFirstCharacter(EFC)について考える. 入力はASCII文字列Pである. PがPythonプログラムでなければ, 解は"no"となる. そうでない場合, PはSISO Pythonプログラムであるという前提で, IとP(I)の最初の記号が同じならその記号を解とする. 例えば, P("banana")="breakfast"なら, "b"が解になる.そのような性質を持つIがなければ, インスタンスは負で解は"no"となる. EFC問題は計算不能であることを証明せよ.
@@ -157,3 +182,38 @@ $S$には少なくとも1つの計算可能なプログラム, 例えば$P(I)=I$
 ライスの定理より, ComputesOneOf${}_{S}$は計算不能であるためYFCは計算不能である.
 ここで, EFCが解をもつ場合に"yes"を出力するプログラムはEFCから容易に作ることができるため, YFCはEFCを介して計算できる. 
 よって還元が成立し, YFC$\le_{T}$EFCより, EFCは計算不能である.
+
+## 7.17
+### 問
+ - 次のTripleOnSome問題が計算不能であることを証明せよ.
+   - 入力: プログラム$P$
+   - 解: もし$P(M)=3M$となる正整数$M$が存在するなら$M$, そうでないなら'no'.
+### 答
+   - 以下でYesOnString問題をTripleOnSomeに還元する.
+      ```
+      from utils import universe
+
+      def one_to_three(inString):
+         progString = rf('progString.txt')
+         newInString = rf('inString.txt')
+         val = universe(progString, newInString)
+         if val == 'yes' and inString == '1':
+            return '3'
+         else:
+            return 'no'
+      ```
+      ```
+      from tripleOnSome import tripleOnSome  # 神託関数
+      from utils import rf, writeFile
+
+      def yesViaTriple(progString, inString):
+         writeFile('progString.txt', progString)
+         writeFile('inString.txt', inString)
+         val = tripleOnSome(rf('one_to_three.py'))   # (2)
+         if val == '1':
+            return 'yes'
+         else:
+            return 'no'
+      ```
+      - (P, I)がYesOnStringの正インスタンスなら, `one_to_three.py`は'1'に対し'3'を返すプログラムになるはずなので, (2)のvalは'1'. したがってyesViaTriple(P, I)は'yes'を返す.
+      - 負インスタンスなら`one_to_three.py`は任意のinputに対して'no'または未定義となるプログラムになるはずなので, (2)のvalは'no'. したがってyesViaTriple(P, I)は'no'を返す.
