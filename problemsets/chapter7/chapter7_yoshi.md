@@ -10,7 +10,7 @@
     - $ D \leq_T G $ より Gは計算不能
 
 - (b) G が計算可能な場合
-    - $ D \leq_T G $ より Dは決定可能
+    - $ F \leq_T G $,$ D \leq_T G $ より Fは計算可能, Dは決定可能
 
 - (c) F が計算可能な場合
     - $ F \leq_T G $ かつ $ D \leq_T G $ だが D,Gに言える結論はない
@@ -48,7 +48,7 @@
     >
     >def yesOnSomeViaNumLonger(progString):
     >    utils.writeFile(’progString.txt’, progString)
-    >    if NumLonger(rf('alterYesToStrLength.py')) > 0:
+    >    if NumLonger(rf('alterYesToStrLength.py')) > 0　or NumLonger(rf('alterYesToStrLength.py')) == 'infinite':
     >       return 'yes'
     >    else:
     >       return 'no' 
@@ -70,10 +70,10 @@
     - 解：解はすべての I に対して $P(I) = |I|$ のときかつそのときに限り “yes”
 
 - ComputeLengthは以下の集合Sに対してComputeOneOfS問題である
-    - $ S = \{ F | if P \in  \{ P | 全てのIに対して |P(I)| = |I|\}, F(P) = 'yes' else F(P) = 'no' \}$
+    - $ S = \{ F | 全てのIに対して, F(I) = |I| \}$
 - この時, 以下ふたつの計算可能関数が存在する
-    - 常に入力を返す定数関数, F(I) = \{I\}, これはSに含まれる
-    - 常に'a'を返す定数関数, F(I) = \{'a'\},  これはSに含まれない
+    - 常に入力を返す定数関数, F(I) = \{I\}, これはSに含まれ, 計算可能
+    - 常に'a'を返す定数関数, F(I) = \{'a'\},  これはSに含まれず, 計算可能
 - Riceの定理より, ComputeOneOfSは計算不能であるから, ComputeLengthも計算不能
 
 - (b) SearchesForSubstring(部分文字列探索)
@@ -82,7 +82,8 @@
     - つまり，s が I の部分文字列である ときかつそのときに限り $P(I) = “yes”$ となるような文字列 s が存在するかどうかを尋ねる.
 
 - SearchesForSubstringは以下の集合Sに対してComputeOneOfS問題である
-    - $ S = \{ F | F(P) = \{ P |あるsが存在して,  $s \in I$ ならば P(I) = 'yes'　そうでないなら P(I)='no' \} \}$
+    - $ S = \{ F | あるsが存在して, $s \in I$ ならば F(I) = 'yes'　そうでないなら F(I)='no' \}$
 - この時, 以下ふたつの計算可能関数が存在する
-    - 常に入力を返す定数関数, F(P) = \{P | I = 'a' ならば P(I) = 'yes' そうでないなら P(I) = 'no'\}, これはSに含まれる
-    - 常に'a'を返す定数関数, F(P) = \{P | 全てのIに対して, P(I) = 'a' \},  これはSに含まれない
+    - ContainGAGAはSに含まれる計算可能問題
+    - isNum問題（入力が数字であればyes）はsに含まれない計算可能問題
+- Riceの定理より, ComputeOneOfSは計算不能であるから, ComputeLengthも計算不能
