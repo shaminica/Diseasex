@@ -163,7 +163,7 @@ P, IをLongerThan3OnString問題の任意の入力とする. すべての入力�
          return 'yes'
    ```
       - `ignoreInput.py`は入力を無視して$P(I)$を実行するので, その実行ステップ数は$P(I)$の実行ステップ数$+c$ (定数).
-      - (P, I)がHaltsOnString問題の正インスタンスなら, 十分大きな$n$をとれば`ignoreInput.py`は$n$文字以上の入力に対して$n$未満のステップ数で止まる. したがって(2)のvalは'no'となり, haltsViaSlowerは'yes'を返す.
+      - (P, I)がHaltsOnString問題の正インスタンスとする. `ignoreInput`は入力の文字数にかかわらず定数回で停止する(これを$k$とする). $k+1$文字の入力$I'$に対して`ignoreInput(I')`は$k$ステップで止まるので, (2)のvalは'no'となる. よってhaltsViaSlower(P, I)は'yes'を返す.
       - (P, I)がHaltsOnStringの負インスタンスなら, `ignoreInput`はどんな入力に対しても停止しない(実行ステップ無限大). したがって(2)のvalは'yes'となり, haltsViaSlowerは'no'を返す.
 
 ## 7.15
