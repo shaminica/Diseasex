@@ -65,18 +65,16 @@
 - ライスの定理の変種のいずれかを使って(つまり，148 ページのテクニック 3)，次の各問題が計算 不能であることを証明せよ.
 
 ### 答
-- (a) ComputesLength(長さを計算)
+#### (a) ComputesLength(長さを計算)
     - 入力:プログラム P
     - 解：解はすべての I に対して $P(I) = |I|$ のときかつそのときに限り “yes”
 
-- ComputeLengthは以下の集合Sに対してComputeOneOfS問題である
-    - $ S = \{ F | 全てのIに対して, F(I) = |I| \}$
-- この時, 以下ふたつの計算可能関数が存在する
-    - 常に入力を返す定数関数, F(I) = \{I\}, これはSに含まれ, 計算可能
-    - 常に'a'を返す定数関数, F(I) = \{'a'\},  これはSに含まれず, 計算可能
-- Riceの定理より, ComputeOneOfSは計算不能であるから, ComputeLengthも計算不能
+- ComputeLengthは以下のFに対してComputeF問題である
+    -  $F ： 全てのIに対して, F(I) = |I|$
+- この時常に入力の長さを返すプログラム, P(I) =　|I|,が存在するのでFは計算可能
+- Riceの定理より, ComputeFは計算不能であるから, ComputeLengthも計算不能
 
-- (b) SearchesForSubstring(部分文字列探索)
+#### (b) SearchesForSubstring(部分文字列探索)
     - 入力:プログラム P
     - 解: P が何らかの定数部分文字列を探索するときかつそのときに限り “yes”.
     - つまり，s が I の部分文字列である ときかつそのときに限り $P(I) = “yes”$ となるような文字列 s が存在するかどうかを尋ねる.
@@ -86,4 +84,4 @@
 - この時, 以下ふたつの計算可能関数が存在する
     - ContainGAGAはSに含まれる計算可能問題
     - isNum問題（入力が数字であればyes）はsに含まれない計算可能問題
-- Riceの定理より, ComputeOneOfSは計算不能であるから, ComputeLengthも計算不能
+- Riceの定理より, ComputeOneOfSは計算不能であるから, SearchesForSubstringも計算不能
