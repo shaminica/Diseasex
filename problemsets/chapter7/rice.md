@@ -40,15 +40,13 @@ from utils import rf
 from universal import universal 
 
 def alterYesToProgram(inString):
-    from F import F # FはQに含まれるプログラム
-    from G import G # GはQに含まれないプログラム
     progString = rf('progString.txt')
     newInString = rf('inString.txt')
     val = universal (progString, newInString)
     if val == 'yes':
-        return F(inString)
+        return rf('F.py') # FはQに含まれるプログラム
     else:
-        return G(inString)
+        return rf('G.py') # GはQに含まれないプログラム
 ```
 `yesViaProgram.py`
 ```
@@ -63,3 +61,5 @@ def yesViaProgram(progString, inString):
     else:
         return 'no'
 ```
+- (P, I)がYesOnStringの正インスタンスなら, `alterYesToProgram.py`はQに含まれるプログラムを返すので, `yesViaProgram`内のvalは'yes'となり, "yes"を返す.
+- 負インスタンスなら`alterYesToProgram.py`はQに含まれないプログラムを返すので, `yesViaProgram`内のvalは'no'となり, "no"を返す.
