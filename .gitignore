@@ -112,4 +112,6 @@ dmypy.json
 cython_debug/
 
 #Other
+.devcontainer/*
+.vscode/*
 .DS_Store
